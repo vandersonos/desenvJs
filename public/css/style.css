@@ -1,0 +1,26 @@
+html,body{
+    height: 100%;
+    width: 100%;
+    font-size: 1rem;
+    font-family: monospace;
+}
+.text-separator{
+    display:flex;
+    align-items: center;
+    font-size: 14px;
+}
+.text-separator:before {
+    margin-right: 5px;
+}
+.text-separator:after, .text-separator:before {
+    content: '';
+    height: 1px;
+    background-color: #d7d7d7;
+    flex-grow: 1;
+}
+.text-separator:after {
+    margin-left: 5px;
+}
+.btn-primary img{
+    color:#777;
+}

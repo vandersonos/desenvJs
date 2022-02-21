@@ -1,0 +1,9 @@
+<div class="alert alert-danger d-flex align-items-center <% if(!message.length ){  %> d-none<%}%>" role="alert">
+    <i class="bi-exclamation-triangle-fill me-3"></i>
+    <div class="alert-message">
+        <% if(message){  
+            message.forEach(function(m){%>
+            <%= m  %>  </br>
+        <% })}  %>
+    </div>
+</div>

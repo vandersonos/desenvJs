@@ -1,0 +1,49 @@
+{
+  "name": "desenvjs",
+  "version": "1.0.0",
+  "description": "Repositório de customização do express + react com módulos uteis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vandersonos/desenvJs.git"
+  },
+  "keywords": [
+    "expressjs",
+    "modulos",
+    "node"
+  ],
+  "author": "Vanderson Oliveira da Silva",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/vandersonos/desenvJs/issues"
+  },
+  "homepage": "https://github.com/vandersonos/desenvJs#readme",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
+    "bootstrap": "^5.1.3",
+    "bootstrap-icons": "^1.8.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "hstore": "^0.0.1",
+    "jquery": "^3.6.0",
+    "nodemon": "^2.0.15",
+    "passport": "^0.5.2",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oidc": "^0.1.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.7.3",
+    "sequelize": "^6.16.1",
+    "sequelize-cli": "^6.4.1"
+  }
+}

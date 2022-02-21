@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<%- include('../../../views/header.ejs') %>
+
+<div class="main d-flex align-items-center justify-content-center">
+    <div class="form-login p-4 rounded">
+        
+        <%- include('../../../views/message.ejs') %>
+        <% if(senha){ %>
+            <div class="mb-3">
+                <input type="hidden" name="userId" value="<%= id %>" />
+                <input type="password" class="form-control" id="inputPassword" placeholder="Senha">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="inputPasswordConfirm" placeholder="Confirmação de Senha">
+            </div>
+            <div class="mb-3">
+                <button type="button" class="btn rounded-pill btn-primary btn-login-alterar" >Alterar senha</button>
+            </div>
+        <%}else if(inicio){%>
+            <div class="mb-3 ">
+                <label for="inputEmail">Insira seu e-mail de cadastro.</label>
+                <input type="text" class="form-control" id="inputEmail" placeholder="E-mail">
+            </div>
+            <div class="mb-3">
+                <button type="button" class="btn rounded-pill btn-primary btn-login-enviar" >Eviar e-mail</button>
+            </div>
+        <%}else{%>
+            <p class="alert alert-info">
+                Token inválido!
+            </p>
+            <a href="/"><button class='btn btn-primary'>Voltar</button></a>
+        <% }%>
+    </div>
+</div>
+<%- include('../../../views/footer.ejs') %>
+
+<script type="text/javascript">
+    window.onload = ()=>{
+        const alerta = (msg)=>{
+            $('.alert.alert-danger').removeClass('d-none');
+            $('.alert-message').html(msg);
+            
+        }
+        $(".btn-login-alterar").click((e)=>{
+            var data = {
+                id: $('input[id="userId"').val(),
+                hash: $('input[id="hash"').val(),
+                password: $('#inputPassword').val(),
+                password_confirm: $('#inputPasswordConfirm').val(),
+            }
+            let error = false;
+            let msg = [];
+            if(!data.password){
+                error = true;
+                msg.push("Senha é obrigatório!")
+            }
+            if(!data.password_confirm){
+                error = true;
+                msg.push("Confirmação de senha é obrigatório!")
+            }
+            if(data.password_confirm != data.password){
+                error = true;
+                msg.push("As senhas não conferem!")
+            }
+            if(!error){
+                /*
+                axios.post('/login/changesenha', data)
+                .then((response) => {
+                    console.log(response, 'response')
+                    if(response.data.redirect){
+                        window.location.href = response.data.redirect;
+                    }else{
+                        window.location.href = '/login';
+
+                    }
+                })
+                .catch((error) => {
+                    console.log(error,error.response.data.message, error.toJSON());
+                    if(error.response.data){
+                        alerta(error.response.data.message)
+                    }else{
+                        alerta(error.message);
+                    }
+                   
+                });
+                */
+            }else{
+                alerta(msg.join('</br>'));
+            }
+        });
+        $(".btn-login-enviar").click((e)=>{
+            var data = {
+                email: $('#inputEmail').val()
+            }
+            let error = false;
+            let msg = [];
+            let r = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+            if(!r.test(data.email)){
+                error = true;
+                msg.push("Endereço de e-mail inválido!")
+            }
+
+            if(!error){
+                
+                axios.post('/login/passwordrecovery', data)
+                .then((response) => {
+                    window.location.href = '/login/mailsended';
+                })
+                .catch((error) => {
+                    console.log(error,error.response.data.message, error.toJSON());
+                    if(error.response.data){
+                        alerta(error.response.data.message)
+                    }else{
+                        alerta(error.message);
+                    }
+                   
+                });
+                
+            }else{
+                alerta(msg.join('</br>'));
+            }
+        });
+    }
+</script>
+<style type="text/css">
+    .main{
+        width: 100%;
+        height: 100%;
+    }
+    .form-login{
+        width: 30%;
+        border: solid 1px darkgray;
+     
+        min-width: 25rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+    .btn{
+       width: 100%; 
+    }
+</style>

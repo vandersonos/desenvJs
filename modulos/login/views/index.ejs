@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<%- include('../../../views/header.ejs') %>
+
+<div class="main d-flex align-items-center justify-content-center">
+    <div class="form-login p-4 rounded">
+        <%- include('../../../views/message.ejs') %>
+        <div class="mb-3">
+            <a class="btn rounded-pill btn-primary" href="/auth/facebook" role="button">Continue com Facebook</a>
+        </div>
+        <div class="mb-3">
+            <a class="btn rounded-pill btn-secondary" href="/login/federated/google" role="button">Continue com Google</a>
+        </div>
+
+        <div class="text-separator mb-2">OU</div>
+        <form action="/login" method="POST">
+            <div class="mb-3 ">
+                <input type="text" class="form-control" id="inputEmail" name="email" placeholder="E-mail">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Senha">
+            </div>
+        </form>
+        <div class="mb-3 d-flex justify-content-between">
+            <div class="form-check col-auto">
+                <input class="form-check-input" type="checkbox" value="" id="savepassword">
+                <label class="form-check-label" for="savepassword">
+                  Lembrar senha?
+                </label>
+              </div>
+              <div class="col-auto">
+                  <a href="/login/passwordrecovery">Esqueceu a sua senha?</a>
+              </div>
+        </div>
+        <div class="mb-3">
+            <button type="button" class="btn rounded-pill btn-primary btn-login" >Login</button>
+        </div>
+        <div class="mb-3">
+            <a class="btn rounded-pill btn-outline-success" href="/login/signup" role="button">Cadastre-se</a>
+        </div>
+       
+    </div>
+</div>
+<script type="text/javascript">
+    window.onload = ()=>{
+        const alerta = (msg)=>{
+            if(msg){
+
+                $('.alert.alert-danger').removeClass('d-none');
+                $('.alert-message').html(msg);
+            }else{
+                $('.alert.alert-danger').addClass('d-none');
+                $('.alert-message').html("");
+            }
+            
+        }
+        $(".btn-login").click((e)=>{
+            var data = {
+                login: $('#inputEmail').val().trim(),
+                password: $('#inputPassword').val().trim()
+            }
+            let error = false;
+            let msg = [];
+            console.log(error, 'error {}', msg)
+            if(!data.login){
+                error = true;
+                msg.push("Login é obrigatório!")
+            }
+            if(!data.password){
+                error = true;
+                msg.push("Senha é obrigatório!")
+            }
+            console.log(error, 'error', msg)
+            if(!error){ $('form').submit();}
+        });
+    }
+</script>
+<style type="text/css">
+    .main{
+        width: 100%;
+        height: 100%;
+
+    }
+    .form-login{
+        width: 30%;
+        border: solid 1px darkgray;
+        min-height: 33rem;
+        min-width: 25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .btn{
+       width: 100%; 
+    }
+</style>
+<%- include('../../../views/footer.ejs') %>
